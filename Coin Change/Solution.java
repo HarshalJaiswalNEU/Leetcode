@@ -1,0 +1,33 @@
+package Coin Change;
+
+class Solution {
+    public int coinChange(int[] coins, int amount) {
+   if (amount < 1) return 0;
+   return coinChange(coins, amount, new int[amount]);
+ }
+
+ private int coinChange(int[] coins, int rem, int[] count) {
+   if (rem < 0) return -1;
+   if (rem == 0) return 0;
+     for(int cnt: count){
+           System.out.print(" ,"+cnt);
+       }
+     System.out.println();
+     System.out.println("rem "+rem);
+   if (count[rem - 1] != 0) return count[rem - 1];
+   int min = Integer.MAX_VALUE;
+   for (int coin : coins) {
+     int res = coinChange(coins, rem - coin, count);
+      System.out.println("for-res "+coin+" :"+res );
+     if (res >= 0 && res < min)
+       min = 1 + res;
+   }
+   count[rem - 1] = (min == Integer.MAX_VALUE) ? -1 : min;
+      for(int cnt: count){
+           System.out.print(" "+cnt);
+       }
+     System.out.println();
+   System.out.println("ret, count[rem - 1] "+ count[rem - 1]);
+   return count[rem - 1];
+ }
+}
